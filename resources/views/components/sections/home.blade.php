@@ -35,7 +35,7 @@
 
             <div class="opacity-0 animate-fade-up delay-400 pt-2 flex flex-wrap items-center gap-3">
                 
-                <a href="https://wa.me/085293362615" target="_blank" title="WhatsApp"
+                <a href="https://wa.me/6285293362615" target="_blank" title="WhatsApp"
                    class="p-2.5 bg-white/80 backdrop-blur-md rounded-2xl border border-stone-200/80 shadow-md transform -rotate-3 hover:rotate-0 hover:-translate-y-1 hover:border-pink-300 hover:shadow-lg transition duration-200">
                     <img src="{{ asset('assets/whatsapp.png') }}" alt="WhatsApp" class="w-6 h-6 object-contain">
                 </a>
