@@ -29,7 +29,7 @@
                 </a>
                 <a href="#about" 
                    class="px-6 py-3 rounded-full bg-white/90 hover:bg-white text-gray-900 border border-gray-300 font-semibold text-sm shadow-sm transition">
-                    Explore More 🌸
+                    See my journey 🌸
                 </a>
             </div>
 
