@@ -1,10 +1,10 @@
 services:
   - type: web
     name: portofolio-belva
-    env: php
+    env: docker
     plan: free
-    buildCommand: "composer install --no-dev --optimize-autoloader && php artisan config:cache && php artisan route:cache"
-    startCommand: "vendor/bin/heroku-php-apache2 public/"
+    repo: https://github.com/leandrabelva/portofolio-leandrabelva
+    branch: main
     envVars:
       - key: APP_ENV
         value: production
@@ -14,3 +14,9 @@ services:
         generateValue: true
       - key: LOG_CHANNEL
         value: stderr
+        
+databases:
+  - name: portofolio_belva_db
+    databaseName: portofolio_belva
+    user: portofolio_user
+    plan: free
