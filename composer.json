@@ -66,6 +66,9 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "vercel": [
+            "if [ -n \"$DB_URL\" ]; then php artisan migrate --force; else echo 'DB_URL kosong, migrate dilewati'; fi"
         ]
     },
     "extra": {
