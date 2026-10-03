@@ -49,7 +49,7 @@
                         <tr class="hover:bg-amber-100/50 transition">
                             <td class="p-4 font-bold text-stone-900 flex items-center gap-3">
                                 @if($cert->image)
-                                    <img src="{{ asset('storage/' . $cert->image) }}" class="w-10 h-10 object-cover rounded-lg border border-stone-300" alt="Cover">
+                                    <img src="{{ $cert->image_url }}" class="w-10 h-10 object-cover rounded-lg border border-stone-300" alt="Cover">
                                 @endif
                                 {{ $cert->title }}
                             </td>

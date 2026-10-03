@@ -45,7 +45,7 @@
                     <input type="file" name="icon" accept="image/*" class="w-full text-xs text-stone-600 bg-white rounded-xl p-2 border border-stone-300">
                     @if($skill->icon)
                         <div class="mt-2 flex items-center gap-3">
-                            <img src="{{ asset('storage/' . $skill->icon) }}" class="w-12 h-12 object-contain p-1 rounded-xl bg-white border border-stone-300" alt="Current Icon">
+                            <img src="{{ $skill->icon_url }}" class="w-12 h-12 object-contain p-1 rounded-xl bg-white border border-stone-300" alt="Current Icon">
                             <span class="text-[10px] text-stone-500">Icon saat ini (biarkan kosong jika tidak ingin mengubah)</span>
                         </div>
                     @endif

@@ -29,7 +29,7 @@
                          style="animation: pureFloat 3s ease-in-out infinite; animation-delay: {{ ($index * 0.3) }}s;">
                         
                         <div class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 flex items-center justify-center mb-2">
-                            <img src="{{ asset('storage/' . $skill->icon) }}" 
+                            <img src="{{ $skill->icon_url }}" 
                                  onerror="this.src='{{ asset('assets/github.png') }}'" 
                                  alt="{{ $skill->name }}" 
                                  class="w-full h-full object-contain group-hover:scale-110 transition duration-200">

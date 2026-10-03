@@ -49,7 +49,7 @@
                         <tr class="hover:bg-amber-100/50 transition">
                             <td class="p-4 font-bold text-stone-900 flex items-center gap-3">
                                 @if($org->image)
-                                    <img src="{{ asset('storage/' . $org->image) }}" class="w-12 h-12 object-cover rounded-xl border border-stone-300 shadow-sm" alt="Poster">
+                                    <img src="{{ $org->image_url }}" class="w-12 h-12 object-cover rounded-xl border border-stone-300 shadow-sm" alt="Poster">
                                 @endif
                                 <div>
                                     <div class="text-stone-900 font-extrabold text-sm">{{ $org->organization_name }}</div>

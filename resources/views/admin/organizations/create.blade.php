@@ -49,7 +49,7 @@
                 <div>
                     <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Poster / Gambar Sampul Organisasi</label>
                     <input type="file" name="image" accept="image/*" required class="w-full text-xs text-stone-600 bg-white rounded-xl p-2 border border-stone-300">
-                    <p class="text-[10px] text-stone-500 mt-1">Format: JPG, JPEG, PNG, WEBP (Maksimal 5MB)</p>
+                    <p class="text-[10px] text-stone-500 mt-1">Format: JPG, JPEG, PNG, WEBP (Maksimal 4MB)</p>
                 </div>
 
                 <div>

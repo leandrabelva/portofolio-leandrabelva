@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Support\Media;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminProjectController extends Controller
 {
@@ -25,22 +25,22 @@ class AdminProjectController extends Controller
             'title'       => 'required|string|max:255',
             'category'    => 'required|string|max:255',
             'description' => 'required',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:5120',
-            'pdf_file'    => 'nullable|mimes:pdf|max:20480',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:4096',
+            'pdf_file'    => 'nullable|mimes:pdf|max:4096',
             'embed_url'   => 'nullable|string',
             'github_url'  => 'nullable|string',
             'website_url' => 'nullable|string',
             'figma_url'   => 'nullable|string',
         ]);
 
-        $imagePath = 'projects/default.png';
+        $imagePath = 'assets/Project.png';
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('projects', 'public');
+            $imagePath = Media::upload($request->file('image'), 'projects');
         }
 
         $pdfPath = null;
         if ($request->hasFile('pdf_file')) {
-            $pdfPath = $request->file('pdf_file')->store('projects/pdf', 'public');
+            $pdfPath = Media::upload($request->file('pdf_file'), 'projects/pdf');
         }
 
         Project::create([
@@ -69,8 +69,8 @@ class AdminProjectController extends Controller
             'title'       => 'required|string|max:255',
             'category'    => 'required|string|max:255',
             'description' => 'required',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:5120',
-            'pdf_file'    => 'nullable|mimes:pdf|max:20480',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:4096',
+            'pdf_file'    => 'nullable|mimes:pdf|max:4096',
             'embed_url'   => 'nullable|string',
             'github_url'  => 'nullable|string',
             'website_url' => 'nullable|string',
@@ -79,18 +79,14 @@ class AdminProjectController extends Controller
 
         //Aktualisasi Gambar
         if ($request->hasFile('image')) {
-            if ($project->image && $project->image !== 'projects/default.png') {
-                Storage::disk('public')->delete($project->image);
-            }
-            $project->image = $request->file('image')->store('projects', 'public');
+            Media::delete($project->image);
+            $project->image = Media::upload($request->file('image'), 'projects');
         }
 
         //Aktualisasi pdf 
         if ($request->hasFile('pdf_file')) {
-            if ($project->pdf_file) {
-                Storage::disk('public')->delete($project->pdf_file);
-            }
-            $project->pdf_file = $request->file('pdf_file')->store('projects/pdf', 'public');
+            Media::delete($project->pdf_file);
+            $project->pdf_file = Media::upload($request->file('pdf_file'), 'projects/pdf');
         }
 
         $project->update([
@@ -110,13 +106,8 @@ class AdminProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        if ($project->image && $project->image !== 'projects/default.png') {
-            Storage::disk('public')->delete($project->image);
-        }
-
-        if ($project->pdf_file) {
-            Storage::disk('public')->delete($project->pdf_file);
-        }
+        Media::delete($project->image);
+        Media::delete($project->pdf_file);
 
         $project->delete();
 

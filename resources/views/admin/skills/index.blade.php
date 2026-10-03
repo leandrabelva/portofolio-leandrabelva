@@ -48,7 +48,7 @@
                         <tr class="hover:bg-amber-100/50 transition">
                             <td class="p-4 font-bold text-stone-900 flex items-center gap-3">
                                 @if($skill->icon)
-                                    <img src="{{ asset('storage/' . $skill->icon) }}" class="w-10 h-10 object-contain p-1 rounded-xl bg-white border border-stone-300 shadow-sm" alt="Icon">
+                                    <img src="{{ $skill->icon_url }}" class="w-10 h-10 object-contain p-1 rounded-xl bg-white border border-stone-300 shadow-sm" alt="Icon">
                                 @endif
                                 <span class="text-sm font-extrabold text-stone-900">{{ $skill->name }}</span>
                             </td>

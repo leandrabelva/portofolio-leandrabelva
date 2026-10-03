@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Skill;
+use App\Support\Media;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminSkillController extends Controller
 {
@@ -27,7 +27,7 @@ class AdminSkillController extends Controller
             'icon'     => 'required|image|mimes:jpeg,png,jpg,svg,webp|max:2048',
         ]);
 
-        $iconPath = $request->file('icon')->store('skills', 'public');
+        $iconPath = Media::upload($request->file('icon'), 'skills');
 
         Skill::create([
             'name'     => $request->name,
@@ -52,10 +52,8 @@ class AdminSkillController extends Controller
         ]);
 
         if ($request->hasFile('icon')) {
-            if ($skill->icon) {
-                Storage::disk('public')->delete($skill->icon);
-            }
-            $skill->icon = $request->file('icon')->store('skills', 'public');
+            Media::delete($skill->icon);
+            $skill->icon = Media::upload($request->file('icon'), 'skills');
         }
 
         $skill->update([
@@ -69,9 +67,7 @@ class AdminSkillController extends Controller
 
     public function destroy(Skill $skill)
     {
-        if ($skill->icon) {
-            Storage::disk('public')->delete($skill->icon);
-        }
+        Media::delete($skill->icon);
 
         $skill->delete();
 

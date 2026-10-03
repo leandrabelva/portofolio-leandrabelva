@@ -17,19 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ProjectSeeder::class,
-        ]);
-
-        $this->call([
-        ProjectSeeder::class,
-        CertificationSeeder::class,
-        OrganizationSeeder::class,
-        ]);
-
-        $this->call([
-        ProjectSeeder::class,
-        CertificationSeeder::class,
-        OrganizationSeeder::class,
-        SkillSeeder::class,
+            CertificationSeeder::class,
+            OrganizationSeeder::class,
+            SkillSeeder::class,
         ]);
     }
 }

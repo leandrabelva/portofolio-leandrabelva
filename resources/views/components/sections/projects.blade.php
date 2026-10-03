@@ -31,17 +31,17 @@
                                     </span>
                                 </a>
                             @elseif($project->pdf_file)
-                                <iframe src="{{ asset('storage/' . $project->pdf_file) }}" class="w-full h-full border-0 pointer-events-none"></iframe>
-                                <a href="{{ asset('storage/' . $project->pdf_file) }}" target="_blank" rel="noopener noreferrer" 
+                                <iframe src="{{ $project->pdf_url }}" class="w-full h-full border-0 pointer-events-none"></iframe>
+                                <a href="{{ $project->pdf_url }}" target="_blank" rel="noopener noreferrer" 
                                    class="absolute inset-0 bg-black/30 hover:bg-black/10 transition flex items-center justify-center opacity-0 group-hover/media:opacity-100">
                                     <span class="bg-pink-500 text-white text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg flex items-center gap-1">
                                         📄 Buka PDF Fullscreen
                                     </span>
                                 </a>
                             @else
-                                <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <img src="{{ $project->image_url }}" alt="{{ $project->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                                
-                                <a href="{{ asset('storage/' . $project->image) }}" target="_blank" rel="noopener noreferrer" 
+                                <a href="{{ $project->image_url }}" target="_blank" rel="noopener noreferrer" 
                                    class="absolute inset-0 bg-black/30 hover:bg-black/10 transition flex items-center justify-center opacity-0 group-hover/media:opacity-100">
                                     <span class="bg-pink-500 text-white text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg flex items-center gap-1">
                                         🖼️ Lihat Foto Fullscreen

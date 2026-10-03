@@ -23,7 +23,7 @@
                     
                     <div class="relative h-[400px] w-full overflow-hidden">
                         
-                        <img src="{{ asset('storage/' . $org->image) }}" 
+                        <img src="{{ $org->image_url }}" 
                              onerror="this.src='{{ asset('assets/logo_binus.png') }}'" 
                              alt="{{ $org->organization_name }}" 
                              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 pointer-events-none">

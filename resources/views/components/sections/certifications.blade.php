@@ -26,7 +26,7 @@
                             
                             
                             <div class="w-full h-[220px] sm:h-[350px] bg-stone-900 rounded-xl overflow-hidden border border-amber-100/30">
-                                <img src="{{ asset('storage/' . $cert->image) }}" 
+                                <img src="{{ $cert->image_url }}" 
                                      onerror="this.src='{{ asset('assets/logo_binus.png') }}'" 
                                      alt="{{ $cert->title }}" 
                                      class="w-full h-full object-cover">

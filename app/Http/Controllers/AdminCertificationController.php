@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Certification;
+use App\Support\Media;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminCertificationController extends Controller
 {
@@ -25,11 +25,11 @@ class AdminCertificationController extends Controller
             'title'          => 'required|string|max:255',
             'issuer'         => 'required|string|max:255',
             'issue_date'     => 'nullable|date',
-            'image'          => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'image'          => 'required|image|mimes:jpeg,png,jpg,webp|max:4096',
             'credential_url' => 'nullable|string',
         ]);
 
-        $imagePath = $request->file('image')->store('certifications', 'public');
+        $imagePath = Media::upload($request->file('image'), 'certifications');
 
         Certification::create([
             'title'          => $request->title,
@@ -53,15 +53,13 @@ class AdminCertificationController extends Controller
             'title'          => 'required|string|max:255',
             'issuer'         => 'required|string|max:255',
             'issue_date'     => 'nullable|date',
-            'image'          => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'image'          => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
             'credential_url' => 'nullable|string',
         ]);
 
         if ($request->hasFile('image')) {
-            if ($certification->image) {
-                Storage::disk('public')->delete($certification->image);
-            }
-            $certification->image = $request->file('image')->store('certifications', 'public');
+            Media::delete($certification->image);
+            $certification->image = Media::upload($request->file('image'), 'certifications');
         }
 
         $certification->update([
@@ -77,9 +75,7 @@ class AdminCertificationController extends Controller
 
     public function destroy(Certification $certification)
     {
-        if ($certification->image) {
-            Storage::disk('public')->delete($certification->image);
-        }
+        Media::delete($certification->image);
 
         $certification->delete();
 

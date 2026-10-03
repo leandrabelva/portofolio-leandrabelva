@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organization;
+use App\Support\Media;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminOrganizationController extends Controller
 {
@@ -26,10 +26,10 @@ class AdminOrganizationController extends Controller
             'organization_name' => 'required|string|max:255',
             'period'            => 'required|string|max:255',
             'description'       => 'required|string',
-            'image'             => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'image'             => 'required|image|mimes:jpeg,png,jpg,webp|max:4096',
         ]);
 
-        $imagePath = $request->file('image')->store('organizations', 'public');
+        $imagePath = Media::upload($request->file('image'), 'organizations');
 
         Organization::create([
             'role'              => $request->role,
@@ -54,14 +54,12 @@ class AdminOrganizationController extends Controller
             'organization_name' => 'required|string|max:255',
             'period'            => 'required|string|max:255',
             'description'       => 'required|string',
-            'image'             => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'image'             => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
         ]);
 
         if ($request->hasFile('image')) {
-            if ($organization->image) {
-                Storage::disk('public')->delete($organization->image);
-            }
-            $organization->image = $request->file('image')->store('organizations', 'public');
+            Media::delete($organization->image);
+            $organization->image = Media::upload($request->file('image'), 'organizations');
         }
 
         $organization->update([
@@ -77,9 +75,7 @@ class AdminOrganizationController extends Controller
 
     public function destroy(Organization $organization)
     {
-        if ($organization->image) {
-            Storage::disk('public')->delete($organization->image);
-        }
+        Media::delete($organization->image);
 
         $organization->delete();
 
