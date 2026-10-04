@@ -14,7 +14,7 @@
                 
                 <div class="md:col-span-4 flex justify-center">
                     <div class="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full p-1.5 bg-gradient-to-tr from-pink-400 via-amber-200 to-pink-500 shadow-xl animate-float">
-                        <img src="{{ asset('assets/Foto Hero_edit.jpeg') }}" alt="Foto Belva" class="w-full h-full rounded-full object-cover border-2 border-stone-900 shadow-inner">
+                        <img src="{{ asset('assets/foto profil_almamater.jpeg') }}" alt="Foto Belva" class="w-full h-full rounded-full object-cover border-2 border-stone-900 shadow-inner">
                     </div>
                 </div>
 

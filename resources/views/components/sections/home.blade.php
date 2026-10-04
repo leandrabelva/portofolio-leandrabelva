@@ -66,7 +66,7 @@
 
         <div class="opacity-0 animate-fade-up delay-400 lg:col-span-5 flex justify-center">
             <div class="animate-float relative p-3 bg-white/90 rounded-3xl shadow-2xl border border-stone-200 transition duration-300 max-w-sm">
-                <img src="{{ asset('assets/Foto Hero_edit.jpeg') }}" alt="Foto Belva" class="rounded-2xl object-cover w-full h-80">
+                <img src="{{ asset('assets/foto profil_jas hitam.jpeg') }}" alt="Foto Belva" class="rounded-2xl object-cover w-full h-80">
             </div>
         </div>
     </div>
