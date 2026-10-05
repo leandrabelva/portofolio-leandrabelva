@@ -130,5 +130,46 @@
         </div>
     </footer>
 
+    <!-- Script khusus untuk efek scroll navbar di HP (tanpa mengubah logika laptop) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navbar = document.getElementById("navbar");
+            const logoText = document.getElementById("logo-text");
+            const burgerBtn = document.getElementById("burger-btn");
+
+            window.addEventListener("scroll", function () {
+                // Hanya aktifkan jika layar berada di ukuran mobile (< 1024px)
+                if (window.innerWidth < 1024) {
+                    if (window.scrollY > 30) {
+                        // Saat di-scroll ke bawah di HP: Beri efek kaca, teks putih, portofolio kuning
+                        navbar.classList.add("bg-stone-950/80", "backdrop-blur-md", "border-b", "border-stone-800/80", "shadow-lg");
+                        
+                        if (logoText) {
+                            logoText.classList.remove("text-[#800000]");
+                            logoText.classList.add("text-yellow-400");
+                        }
+                        
+                        if (burgerBtn) {
+                            burgerBtn.classList.remove("text-stone-900");
+                            burgerBtn.classList.add("text-white");
+                        }
+                    } else {
+                        // Kembali ke atas di HP: Kembalikan seperti semula
+                        navbar.classList.remove("bg-stone-950/80", "backdrop-blur-md", "border-b", "border-stone-800/80", "shadow-lg");
+                        
+                        if (logoText) {
+                            logoText.classList.remove("text-yellow-400");
+                            logoText.classList.add("text-[#800000]");
+                        }
+                        
+                        if (burgerBtn) {
+                            burgerBtn.classList.remove("text-white");
+                            burgerBtn.classList.add("text-stone-900");
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
