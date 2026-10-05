@@ -131,42 +131,68 @@
     </footer>
 
     <!-- Script khusus untuk efek scroll navbar di HP (tanpa mengubah logika laptop) -->
+    <!-- Script Navbar & Mobile Menu yang Benar -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const navbar = document.getElementById("navbar");
             const logoText = document.getElementById("logo-text");
             const burgerBtn = document.getElementById("burger-btn");
+            const mobileMenu = document.getElementById("mobile-menu");
+            const navLinks = document.querySelectorAll(".nav-item");
 
+            // 1. Fungsi Klik Tombol Burger (Buka/Tutup Menu HP)
+            if (burgerBtn && mobileMenu) {
+                burgerBtn.addEventListener("click", () => {
+                    mobileMenu.classList.toggle("hidden");
+                });
+
+                // Tutup menu otomatis pas salah satu link diklik
+                document.querySelectorAll(".mobile-nav-item").forEach(item => {
+                    item.addEventListener("click", () => {
+                        mobileMenu.classList.add("hidden");
+                    });
+                });
+            }
+
+            // 2. Fungsi Efek Scroll Navbar (Berlaku untuk Laptop & HP)
             window.addEventListener("scroll", function () {
-                // Hanya aktifkan jika layar berada di ukuran mobile (< 1024px)
-                if (window.innerWidth < 1024) {
-                    if (window.scrollY > 30) {
-                        // Saat di-scroll ke bawah di HP: Beri efek kaca, teks putih, portofolio kuning
-                        navbar.classList.add("bg-stone-950/80", "backdrop-blur-md", "border-b", "border-stone-800/80", "shadow-lg");
-                        
-                        if (logoText) {
-                            logoText.classList.remove("text-[#800000]");
-                            logoText.classList.add("text-yellow-400");
-                        }
-                        
-                        if (burgerBtn) {
-                            burgerBtn.classList.remove("text-stone-900");
-                            burgerBtn.classList.add("text-white");
-                        }
-                    } else {
-                        // Kembali ke atas di HP: Kembalikan seperti semula
-                        navbar.classList.remove("bg-stone-950/80", "backdrop-blur-md", "border-b", "border-stone-800/80", "shadow-lg");
-                        
-                        if (logoText) {
-                            logoText.classList.remove("text-yellow-400");
-                            logoText.classList.add("text-[#800000]");
-                        }
-                        
-                        if (burgerBtn) {
-                            burgerBtn.classList.remove("text-white");
-                            burgerBtn.classList.add("text-stone-900");
-                        }
+                if (window.scrollY > 30) {
+                    // Ketika DI-SCROLL KE BAWAH (Efek kaca, portofolio kuning, teks putih)
+                    navbar.classList.add("bg-stone-950/90", "backdrop-blur-md", "border-b", "border-stone-800/80", "shadow-xl");
+                    
+                    if (logoText) {
+                        logoText.classList.remove("text-[#800000]");
+                        logoText.classList.add("text-yellow-400");
                     }
+                    
+                    if (burgerBtn) {
+                        burgerBtn.classList.remove("text-stone-900");
+                        burgerBtn.classList.add("text-stone-100");
+                    }
+
+                    navLinks.forEach(link => {
+                        link.classList.remove("text-stone-900");
+                        link.classList.add("text-stone-100");
+                    });
+
+                } else {
+                    // Ketika POSISI DI ATAS (Kembali seperti semula)
+                    navbar.classList.remove("bg-stone-950/90", "backdrop-blur-md", "border-b", "border-stone-800/80", "shadow-xl");
+                    
+                    if (logoText) {
+                        logoText.classList.remove("text-yellow-400");
+                        logoText.classList.add("text-[#800000]");
+                    }
+                    
+                    if (burgerBtn) {
+                        burgerBtn.classList.remove("text-stone-100");
+                        burgerBtn.classList.add("text-stone-900");
+                    }
+
+                    navLinks.forEach(link => {
+                        link.classList.remove("text-stone-100");
+                        link.classList.add("text-stone-900");
+                    });
                 }
             });
         });
