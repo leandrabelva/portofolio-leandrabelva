@@ -1,9 +1,10 @@
 <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
         
-        <a href="#home" class="flex items-center gap-3 group">
-            <img src="{{ asset('assets/Logo Lean Baru.png') }}" alt="Logo LEAN" class="h-15 w-auto object-contain">
-            <span id="logo-text" class="font-serif-y2k text-2xl font-bold tracking-wide text-[#800000] group-hover:text-pink-400 transition-colors duration-300">
+        <!-- Logo dan Teks: Di HP menjadi kolom ke bawah (flex-col), di layar besar (lg) menjadi baris menyamping (lg:flex-row) -->
+        <a href="#home" class="flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-3 group">
+            <img src="{{ asset('assets/Logo Lean Baru.png') }}" alt="Logo LEAN" class="h-12 lg:h-15 w-auto object-contain">
+            <span id="logo-text" class="font-serif-y2k text-lg lg:text-2xl font-bold tracking-wide text-[#800000] group-hover:text-pink-400 transition-colors duration-300">
                 PORTOFOLIO
             </span>
         </a>
@@ -37,91 +38,3 @@
         <a href="#contact" class="mobile-nav-item block text-stone-300 hover:text-pink-400 font-semibold text-base transition-colors duration-200 py-1">Contact</a>
     </div>
 </header>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const navbar = document.getElementById('navbar');
-        const navLinksContainer = document.getElementById('nav-links');
-        const logoText = document.getElementById('logo-text');
-        const burgerBtn = document.getElementById('burger-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        const navItems = document.querySelectorAll('.nav-item');
-        const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
-        const sections = document.querySelectorAll('section[id]');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 40) {
-                navbar.classList.add('bg-black/40', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-white/10');
-                navbar.classList.remove('py-4');
-                navbar.classList.add('py-3');
-
-                navLinksContainer.classList.remove('text-stone-900');
-                navLinksContainer.classList.add('text-white');
-
-                logoText.classList.remove('text-[#800000]');
-                logoText.classList.add('text-amber-100');
-
-                burgerBtn.classList.remove('text-stone-900');
-                burgerBtn.classList.add('text-white');
-            } else {
-                navbar.classList.remove('bg-black/40', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-white/10');
-                navbar.classList.remove('py-3');
-                navbar.classList.add('py-4');
-
-                navLinksContainer.classList.remove('text-white');
-                navLinksContainer.classList.add('text-stone-900');
-
-                logoText.classList.remove('text-amber-100');
-                logoText.classList.add('text-[#800000]');
-
-                burgerBtn.classList.remove('text-white');
-                burgerBtn.classList.add('text-stone-900');
-            }
-        });
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '-20% 0px -60% 0px',
-            threshold: 0
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const activeId = entry.target.getAttribute('id');
-
-                    navItems.forEach(link => {
-                        if (link.getAttribute('href') === `#${activeId}`) {
-                            link.classList.add('text-pink-500', 'font-bold');
-                        } else {
-                            link.classList.remove('text-pink-500', 'font-bold');
-                        }
-                    });
-
-                    mobileNavItems.forEach(link => {
-                        if (link.getAttribute('href') === `#${activeId}`) {
-                            link.classList.add('text-pink-400', 'font-bold', 'scale-105');
-                            link.classList.remove('text-stone-300');
-                        } else {
-                            link.classList.remove('text-pink-400', 'font-bold', 'scale-105');
-                            link.classList.add('text-stone-300');
-                        }
-                    });
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => observer.observe(section));
-
-        burgerBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        mobileNavItems.forEach(item => {
-            item.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-    });
-</script>
